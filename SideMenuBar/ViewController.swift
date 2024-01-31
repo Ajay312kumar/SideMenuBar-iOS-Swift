@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height))
         
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -45,24 +45,32 @@ class ViewController: UIViewController {
 
     
     @objc func swipedToLeft() {
+        print("swipedToLeft")
         self.view.addGestureRecognizer(swipToRight)
         self.view.removeGestureRecognizer(swipeToLeft)
         UIView.animate(withDuration: 0.5) {
             self.sideBarView.frame = CGRect(x: 0, y: 50, width: 0, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 50, width: 0, height: self.view.bounds.height)
+            self.tableView.frame = CGRect(x: 0, y: 50, width: 150, height: self.view.bounds.height)
+            
+            // Decrease the width of sideBarView
+            self.sideBarView.frame.size.width /= 3.0
+            self.tableView.frame.size.width /= 3.5
         }
         isEnableSideBarView = false
-
-        
     }
-    
+
+
     
     @objc func swipedToRight() {
+        
+        print("swipedToRight")
+        
         self.view.addGestureRecognizer(swipeToLeft)
         self.view.removeGestureRecognizer(swipToRight)
         UIView.animate(withDuration: 0.5) {
-            self.sideBarView.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width/1.5, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width/1.5, height: self.view.bounds.height)
+            self.sideBarView.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width/1.3, height: self.view.bounds.height)
+            self.tableView.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width/1.3, height: self.view.bounds.height)
+            
             
         }
         isEnableSideBarView = true
@@ -80,8 +88,8 @@ class ViewController: UIViewController {
             self.view.addGestureRecognizer(swipToRight)
             self.view.removeGestureRecognizer(swipeToLeft)
             UIView.animate(withDuration: 0.5) {
-                self.sideBarView.frame = CGRect(x: 0, y: 50, width: 0, height: self.view.bounds.height)
-                self.tableView.frame = CGRect(x: 0, y: 50, width: 0, height: self.view.bounds.height)
+                self.sideBarView.frame = CGRect(x: 0, y: 50, width: 50, height: self.view.bounds.height)
+                self.tableView.frame = CGRect(x: 0, y: 50, width: 50, height: self.view.bounds.height)
             }
             isEnableSideBarView = false
 
